@@ -18,7 +18,7 @@ cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
 
-curl -L --silent $SOURCE_URL | tar xz
+curl -L --silent $SOURCE_URL | tar xvf
 
 echo "Export PATH to application profile" | indent
 
