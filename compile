@@ -1,0 +1,28 @@
+#!/bin/sh
+
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+echo "Compile Libreoffice from source"
+echo "--------Define Build directory-------" 
+
+BUILD_DIR=$1
+VENDOR_DIR="vendor"
+SOURCE_URL="http://ftp5.gwdg.de/pub/tdf/libreoffice/src/5.2.2/libreoffice-5.2.2.2.tar.xz"
+
+echo "Downloading libreoffice from URL -> " $SOURCE_URL | indent
+
+cd $BUILD_DIR
+mkdir -p $VENDOR_DIR
+cd $VENDOR_DIR
+
+curl -L --silent $SOURCE_URL | tar xz
+
+echo "Export PATH to application profile" | indent
+
+PROFILE_PATH="$BUILD_DIR/.profile.d/liberoffice.sh"
+
+mkdir -p $(dirname $PROFILE_PATH)
+echo 'export PATH="$PATH:vendor/libreoffice/opt/libreoffice5.2/program"' >> $PROFILE_PATH
